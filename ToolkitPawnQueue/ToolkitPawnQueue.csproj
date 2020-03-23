@@ -80,7 +80,6 @@
     <Compile Include="DrawPawn.cs" />
     <Compile Include="GameComponentPawnTracking.cs" />
     <Compile Include="PawnAssignmentWindow.cs" />
-    <Compile Include="PawnCommands.cs" />
     <Compile Include="PawnQueue.cs" />
     <Compile Include="PawnQueueSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +88,7 @@
     <Content Include="About\About.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Defs\PawnCommands.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
