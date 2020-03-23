@@ -30,7 +30,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
             return false;
         }
 
@@ -74,7 +74,7 @@ namespace ToolkitPawnQueue.Commands
                 payload += string.Join(", ", equipment.Select(item => item.LabelCap).ToArray());
             }
 
-            MessageQueue.messageQueue.Enqueue(payload);
+            TwitchWrapper.SendChatMessage(payload);
         }
 
         private static float CalculateArmorRating(Pawn subject, StatDef stat)
@@ -92,11 +92,13 @@ namespace ToolkitPawnQueue.Commands
                 {
                     foreach (var a in apparel)
                     {
-                        if (a.def.apparel.CoversBodyPart(part))
+                        if (!a.def.apparel.CoversBodyPart(part))
                         {
-                            var v = Mathf.Clamp01(a.GetStatValue(stat) / 2f);
-                            cache *= 1f - v;
+                            continue;
                         }
+
+                        var v = Mathf.Clamp01(a.GetStatValue(stat) / 2f);
+                        cache *= 1f - v;
                     }
                 }
 

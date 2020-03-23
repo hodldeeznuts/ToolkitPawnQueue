@@ -30,7 +30,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're already in this colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're already in this colony.");
             return false;
         }
 
@@ -60,7 +60,7 @@ namespace ToolkitPawnQueue.Commands
                 response += GetHealthReport(_target);
             }
 
-            MessageQueue.messageQueue.Enqueue(response);
+            TwitchWrapper.SendChatMessage(response);
         }
 
         private static string GetHealthReport(Pawn subject)

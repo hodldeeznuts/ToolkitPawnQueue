@@ -28,7 +28,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
             return false;
         }
 
@@ -43,7 +43,7 @@ namespace ToolkitPawnQueue.Commands
 
             if (!_target.workSettings?.EverWork ?? true)
             {
-                MessageQueue.messageQueue.Enqueue(response + "Your pawn is incapable of work.");
+                TwitchWrapper.SendChatMessage(response + "Your pawn is incapable of work.");
                 return;
             }
 
@@ -57,7 +57,7 @@ namespace ToolkitPawnQueue.Commands
             response += $"{_target.Name.ToStringShort.CapitalizeFirst()}'s work priorities ";
             response += string.Join(", ", priorities.ToArray());
 
-            MessageQueue.messageQueue.Enqueue(response);
+            TwitchWrapper.SendChatMessage(response);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're not in the colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're not in the colony.");
             return false;
         }
 
@@ -87,7 +87,7 @@ namespace ToolkitPawnQueue.Commands
             response += " | Traits: ";
             response += string.Join(", ", _target.story.traits.allTraits.Select(t => t.LabelCap));
 
-            MessageQueue.messageQueue.Enqueue(response);
+            TwitchWrapper.SendChatMessage(response);
         }
 
         private static IEnumerable<WorkTags> GetWorkTags(WorkTags tags)

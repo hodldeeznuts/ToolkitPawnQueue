@@ -29,9 +29,7 @@ namespace ToolkitPawnQueue.Commands
 
             if (component.TryAddUsernameToQueue(chatCommand.ChatMessage.Username))
             {
-                MessageQueue.messageQueue.Enqueue(
-                    $"@{chatCommand.ChatMessage.Username} → You've joined the pawn queue."
-                );
+                TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You've joined the pawn queue.");
             }
         }
     }

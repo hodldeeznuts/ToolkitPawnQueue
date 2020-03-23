@@ -28,7 +28,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're not in the colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're not in the colony.");
             return false;
         }
 
@@ -66,7 +66,7 @@ namespace ToolkitPawnQueue.Commands
                 }
             }
 
-            MessageQueue.messageQueue.Enqueue(response);
+            TwitchWrapper.SendChatMessage(response);
         }
     }
 }

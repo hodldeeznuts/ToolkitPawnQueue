@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using ToolkitCore;
@@ -31,7 +30,7 @@ namespace ToolkitPawnQueue.Commands
                 return true;
             }
 
-            MessageQueue.messageQueue.Enqueue($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
+            TwitchWrapper.SendChatMessage($"@{chatCommand.ChatMessage.Username} → You're not in this colony.");
             return false;
         }
 
@@ -47,7 +46,7 @@ namespace ToolkitPawnQueue.Commands
             if (_target.health.hediffSet?.hediffs?.Any() ?? true)
             {
                 response += "No health conditions.";
-                MessageQueue.messageQueue.Enqueue(response);
+                TwitchWrapper.SendChatMessage(response);
                 return;
             }
 
@@ -84,7 +83,7 @@ namespace ToolkitPawnQueue.Commands
                 response += part + ": " + string.Join(", ", container.ToArray());
             }
 
-            MessageQueue.messageQueue.Enqueue(response);
+            TwitchWrapper.SendChatMessage(response);
         }
 
         private static float GetListPriority(BodyPartRecord record)
