@@ -29,29 +29,30 @@ namespace ToolkitPawnQueue
 
             ls.Begin(rect);
 
-            ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of available usernames.");
-
-            ls.CheckboxLabeled("Joinable Name Queue - !joinqueue", ref joinableQueue, "Let viewers join a name queue");
-
-            ls.GapLine();
-
-            ls.Label("Enable/Disable pawn information commands");
-
-            ls.CheckboxLabeled("My Pawn Skills - !mypawnskills", ref pawnSkillsCommand, "Let viewers get a message containing information about their pawns skills");
-
-            ls.CheckboxLabeled("My Pawn Story - !mypawnstory", ref pawnStoryCommand, "Let Viewers get a message containing information about their pawns traits and backstory");
-
-            ls.CheckboxLabeled("My Pawn Body - !mypawnbody", ref pawnBodyCommand, "Let viewers get a message containing information about their pawns body");
-
-            ls.CheckboxLabeled("My Pawn Gear - !mypawngear", ref pawnGearCommand, "Let viewers get a message containing information about their pawns gear");
-
-            ls.CheckboxLabeled("My Pawn Health - !mypawnhealth", ref pawnHealthCommand, "Let viewers get a message containing information about their pawns health");
-
-            ls.CheckboxLabeled("My Pawn Work - !mypawnwork", ref pawnWorkCommand, "Let viewrs get a message containing information about their pawns work");
-
-            ls.CheckboxLabeled("My Pawn Needs - !mypawnneeds", ref pawnNeedsCommand, "Let viewers get a message containing information about their pawns needs");
-
-            ls.GapLine();
+            // Removed to defs.
+            // ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of available usernames.");
+            //
+            // ls.CheckboxLabeled("Joinable Name Queue - !joinqueue", ref joinableQueue, "Let viewers join a name queue");
+            //
+            // ls.GapLine();
+            //
+            // ls.Label("Enable/Disable pawn information commands");
+            //
+            // ls.CheckboxLabeled("My Pawn Skills - !mypawnskills", ref pawnSkillsCommand, "Let viewers get a message containing information about their pawns skills");
+            //
+            // ls.CheckboxLabeled("My Pawn Story - !mypawnstory", ref pawnStoryCommand, "Let Viewers get a message containing information about their pawns traits and backstory");
+            //
+            // ls.CheckboxLabeled("My Pawn Body - !mypawnbody", ref pawnBodyCommand, "Let viewers get a message containing information about their pawns body");
+            //
+            // ls.CheckboxLabeled("My Pawn Gear - !mypawngear", ref pawnGearCommand, "Let viewers get a message containing information about their pawns gear");
+            //
+            // ls.CheckboxLabeled("My Pawn Health - !mypawnhealth", ref pawnHealthCommand, "Let viewers get a message containing information about their pawns health");
+            //
+            // ls.CheckboxLabeled("My Pawn Work - !mypawnwork", ref pawnWorkCommand, "Let viewrs get a message containing information about their pawns work");
+            //
+            // ls.CheckboxLabeled("My Pawn Needs - !mypawnneeds", ref pawnNeedsCommand, "Let viewers get a message containing information about their pawns needs");
+            //
+            // ls.GapLine();
 
             if(ls.ButtonTextLabeled("Open/Manage name Queue", "Name Queue"))
             {
