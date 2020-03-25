@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ToolkitCore;
+using TwitchLib.Client.Models;
 using Verse;
 
 namespace ToolkitPawnQueue
@@ -14,7 +15,7 @@ namespace ToolkitPawnQueue
 
         }
 
-        public override void ParseCommand(global::TwitchLib.Client.Models.ChatMessage msg)
+        public override void ParseCommand(ChatMessage msg)
         {
             GameComponentPawnTracking component = Current.Game.GetComponent<GameComponentPawnTracking>();
 
