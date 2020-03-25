@@ -13,9 +13,7 @@ namespace ToolkitPawnQueue
     {
         public PawnAssignmentWindow()
         {
-            currentListOfPawns = ListOfColonists(out groupOfPawnsLabel, out selectedPawn);
-            usernamesInQueue = Current.Game.GetComponent<GameComponentPawnTracking>().viewersInQueue.Count;
-
+            PawnUtilities.currentListOfPawns = PawnUtilities.ListOfColonists(out PawnUtilities.groupOfPawnsLabel, out selectedPawn);
             this.doCloseButton = true;
         }
 
@@ -50,7 +48,7 @@ namespace ToolkitPawnQueue
 
             }
 
-            Widgets.Label(middleLabel, pawnGroupType.ToString());
+            Widgets.Label(middleLabel, PawnUtilities.groupOfPawnsLabel);
 
             if (Widgets.ButtonText(rightArrow, ">", true, true, false))
             {
@@ -63,7 +61,7 @@ namespace ToolkitPawnQueue
 
             Rect pawnCard = new Rect(inRect.width - 124 - padding, 0, 124, 124);
 
-            DrawColonist(pawnCard, selectedPawn);
+            PawnUtilities.DrawColonist(pawnCard, selectedPawn);
 
             // Bottom Section
 
@@ -71,19 +69,21 @@ namespace ToolkitPawnQueue
 
             if (assignedUsername != null)
             {
+                // Viewer Assigned
                 Widgets.Label(pawnInformation, $"<color=green>Assigned User</color>: {assignedUsername}");
             }
             else
             {
+                // Viewer Not Assigned
                 Widgets.Label(pawnInformation, "<color=red>Not Assigned</color>");
 
-                NewLine(pawnInformation, out Rect usernamesInfo);
+                PawnUtilities.NewLine(pawnInformation, out Rect usernamesInfo);
 
-                Widgets.Label(usernamesInfo, $"Users in Queue: {usernamesInQueue}");
+                Widgets.Label(usernamesInfo, $"Users in Queue: {PawnUtilities.usernamesInQueue}");
 
-                NewLine(usernamesInfo, out Rect pickUsername);
+                PawnUtilities.NewLine(usernamesInfo, out Rect pickUsername);
 
-                if (usernamesInQueue > 0)
+                if (PawnUtilities.usernamesInQueue > 0)
                 {
                     Widgets.Label(pickUsername, "Pick User: ");
 
@@ -107,7 +107,7 @@ namespace ToolkitPawnQueue
                     pickUsername.width = usernamesInfo.width;
                 }
 
-                NewLine(pickUsername, out Rect usernameInput);
+                PawnUtilities.NewLine(pickUsername, out Rect usernameInput);
 
                 if (usernameFromQueue != null)
                 {
@@ -123,32 +123,9 @@ namespace ToolkitPawnQueue
 
         }
 
-        // Pawn Groups
-
-        List<Pawn> currentListOfPawns = new List<Pawn>();
-
-        PawnGroupType pawnGroupType = PawnGroupType.Colonists;
-
-        string groupOfPawnsLabel = "None";
-
-        static List<Pawn> ListOfColonists(out string groupOfPawnsLabel, out Pawn selectedPawn)
-        {
-            var newList = new List<Pawn>();
-
-            foreach (Map map in Find.Maps)
-            {
-                newList = newList.Concat(map.mapPawns.FreeColonists).ToList();
-            }
-
-            groupOfPawnsLabel = "Colonists";
-            selectedPawn = newList.First();
-
-            return newList;
-        }
-
         void NextPawn()
         {
-            if (iterator >= currentListOfPawns.Count - 1)
+            if (iterator >= PawnUtilities.currentListOfPawns.Count - 1)
             {
                 iterator = 0;
             }
@@ -164,7 +141,7 @@ namespace ToolkitPawnQueue
         {
             if (iterator <= 0)
             {
-                iterator = currentListOfPawns.Count - 1;
+                iterator = PawnUtilities.currentListOfPawns.Count - 1;
             }
             else
             {
@@ -173,31 +150,6 @@ namespace ToolkitPawnQueue
 
             UpdateInfoFromPawnChange();
         }
-
-        void UpdateInfoFromPawnChange()
-        {
-            selectedPawn = currentListOfPawns[iterator];
-
-            TryFindUserAssigned(selectedPawn, out assignedUsername);
-
-            usernameFromQueue = null;
-        }
-
-        // Selected Pawn
-
-        Pawn selectedPawn = null;
-
-        int iterator = 0;
-
-        // Selected User
-
-        string assignedUsername = null;
-
-        string usernameFromQueue = null;
-
-        int usernameIterator = 0;
-
-        int usernamesInQueue = 0;
 
         void NextUsername()
         {
@@ -227,45 +179,29 @@ namespace ToolkitPawnQueue
             usernameIterator = 0;
         }
 
+        string usernameFromQueue = null;
+
+        // Selected Pawn
+
+        Pawn selectedPawn = null;
+
+        int iterator = 0;
+
+        int usernameIterator = 0;
+
+        string assignedUsername = null;
+
+        void UpdateInfoFromPawnChange()
+        {
+            selectedPawn = PawnUtilities.currentListOfPawns[iterator];
+
+            PawnUtilities.TryFindUserAssigned(selectedPawn, out assignedUsername);
+
+            usernameFromQueue = null;
+        }
+
         // GUI
 
         static float padding = 10f;
-
-        public static void DrawColonist(Rect rect, Pawn colonist)
-        {
-            Color color = new Color(1f, 1f, 1f, 1f);
-            GUI.color = color;
-
-            GUI.DrawTexture(rect, ColonistBar.BGTex);
-
-            GUI.color = Color.white;
-
-            GUI.DrawTexture(rect, PortraitsCache.Get(colonist, rect.size));
-        }
-
-        // Utilities
-
-        static void NewLine(Rect rect, out Rect newRect)
-        {
-            newRect = new Rect(rect.x, rect.y + rect.height + 2f, rect.width, rect.height);
-        }
-
-        bool TryFindUserAssigned(Pawn pawn, out string username)
-        {
-            GameComponentPawnTracking component = Current.Game.GetComponent<GameComponentPawnTracking>();
-
-            if (component.TryGetUserAssignedToPawn(pawn, out username))
-            {
-                return true;
-            }
-
-            username = null;
-            return false;
-        }
-
-        enum PawnGroupType
-        {
-            Colonists
-        }
     }
 }

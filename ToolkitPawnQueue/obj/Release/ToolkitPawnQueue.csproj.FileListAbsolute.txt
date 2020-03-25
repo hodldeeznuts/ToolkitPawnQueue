@@ -5,3 +5,4 @@ C:\Users\donav\source\repos\ToolkitPawnQueue\ToolkitPawnQueue\obj\Release\Toolki
 C:\Users\donav\source\repos\ToolkitPawnQueue\ToolkitPawnQueue\obj\Release\ToolkitPawnQueue.csproj.CoreCompileInputs.cache
 C:\Users\donav\source\repos\ToolkitPawnQueue\ToolkitPawnQueue\obj\Release\ToolkitPawnQueue.dll
 C:\Users\donav\source\repos\ToolkitPawnQueue\ToolkitPawnQueue\obj\Release\ToolkitPawnQueue.pdb
+C:\Users\donav\source\repos\ToolkitPawnQueue\ToolkitPawnQueue\obj\Release\ToolkitPawnQueue.csproj.CopyComplete

@@ -22,7 +22,7 @@ namespace ToolkitPawnQueue
             {
                 if (component.TryAddUsernameToQueue(msg.Username))
                 {
-                    MessageQueue.messageQueue.Enqueue($"@{msg.Username} you have joined the pawn queue.");
+                    TwitchWrapper.SendChatMessage($"@{msg.Username} you have joined the pawn queue.");
                 }
             }
 
@@ -31,7 +31,7 @@ namespace ToolkitPawnQueue
 
                 if (!component.TryGetPawnAssignedToUser(msg.Username, out Pawn pawn))
                 {
-                    MessageQueue.messageQueue.Enqueue($"@{msg.Username} you are not in the colony.");
+                    TwitchWrapper.SendChatMessage($"@{msg.Username} you are not in the colony.");
                     return;
                 }
 
@@ -59,14 +59,14 @@ namespace ToolkitPawnQueue
                     }
                 }
 
-                MessageQueue.messageQueue.Enqueue(output);
+                TwitchWrapper.SendChatMessage(output);
             }
 
             if (PawnQueueSettings.pawnStoryCommand && msg.Message.StartsWith("!mypawnstory"))
             {
                 if (!component.TryGetPawnAssignedToUser(msg.Username, out Pawn pawn))
                 {
-                    MessageQueue.messageQueue.Enqueue($"@{msg.Username} you are not in the colony.");
+                    TwitchWrapper.SendChatMessage($"@{msg.Username} you are not in the colony.");
                     return;
                 }
 
@@ -127,7 +127,7 @@ namespace ToolkitPawnQueue
                     }
                 }
 
-                MessageQueue.messageQueue.Enqueue(output);
+                TwitchWrapper.SendChatMessage(output);
             }
         }
 
