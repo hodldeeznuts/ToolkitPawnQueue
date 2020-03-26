@@ -1,75 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Defs>
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>JoinQueue</defName>
         <commandText>joinqueue</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.JoinQueueCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnBody</defName>
         <commandText>mypawnbody</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnBodyCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnGear</defName>
         <commandText>mypawngear</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnGearCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnHealth</defName>
         <commandText>mypawnhealth</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnHealthCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnNeeds</defName>
         <commandText>mypawnneeds</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnNeedsCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnSkills</defName>
         <commandText>mypawnskills</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnSkillsCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnStory</defName>
         <commandText>mypawnstory</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnStoryCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
     
-    <ToolkitCore.Models.ToolkitCommand>
+    <ToolkitCore.Models.ToolkitChatCommand>
         <defName>PawnWork</defName>
         <commandText>mypawnwork</commandText>
         <enabled>true</enabled>
         <commandClass>ToolkitPawnQueue.Commands.PawnWorkCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
-    </ToolkitCore.Models.ToolkitCommand>
+    </ToolkitCore.Models.ToolkitChatCommand>
 </Defs>

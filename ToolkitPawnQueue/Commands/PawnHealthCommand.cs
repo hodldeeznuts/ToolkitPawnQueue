@@ -125,7 +125,7 @@ namespace ToolkitPawnQueue.Commands
 
         private static string GetCapacityReport(Pawn subject, PawnCapacityDef capacity)
         {
-            var payload = "";
+            var payload = $"{capacity.GetLabelFor(subject).CapitalizeFirst()}: ";
 
             if (!PawnCapacityUtility.BodyCanEverDoCapacity(subject.RaceProps.body, capacity))
             {

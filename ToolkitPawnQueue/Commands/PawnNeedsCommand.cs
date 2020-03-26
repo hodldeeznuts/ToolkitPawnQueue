@@ -40,7 +40,7 @@ namespace ToolkitPawnQueue.Commands
             }
 
             var response = $"@{chatCommand.ChatMessage.Username} → ";
-            response += $"{_target.Name.ToStringShort.CapitalizeFirst()}'s needs are ";
+            response += $"Your needs are: ";
             
             var container = new StringBuilder();
             var needs = _target.needs.AllNeeds;

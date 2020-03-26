@@ -43,7 +43,7 @@ namespace ToolkitPawnQueue.Commands
 
             var response = $"@{chatCommand.ChatMessage.Username} → ";
 
-            if (_target.health.hediffSet?.hediffs?.Any() ?? true)
+            if (!_target.health.hediffSet?.hediffs?.Any() ?? true)
             {
                 response += "No health conditions.";
                 TwitchWrapper.SendChatMessage(response);
@@ -55,7 +55,7 @@ namespace ToolkitPawnQueue.Commands
             var tMax = _target.GetStatValue(StatDefOf.ComfyTemperatureMax).ToStringTemperature();
 
             response += $"🌡️{tMin}~{tMax}";
-
+            
             foreach (var group in grouped)
             {
                 var part = group.Key?.LabelCap ?? "WholeBody".Translate();
@@ -80,7 +80,7 @@ namespace ToolkitPawnQueue.Commands
                     container.Add(segment);
                 }
 
-                response += part + ": " + string.Join(", ", container.ToArray());
+                response += " | " + part + ": " + string.Join(", ", container.ToArray());
             }
 
             TwitchWrapper.SendChatMessage(response);

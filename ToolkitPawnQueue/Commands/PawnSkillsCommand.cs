@@ -40,7 +40,7 @@ namespace ToolkitPawnQueue.Commands
             }
 
             var response = $"@{chatCommand.ChatMessage.Username} → ";
-            response += $"{_target.Name.ToStringShort.CapitalizeFirst()}'s skill levels are ";
+            response += $"Your skill levels are: ";
 
             var skills = _target.skills.skills;
 

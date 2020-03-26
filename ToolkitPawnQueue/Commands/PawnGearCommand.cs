@@ -48,28 +48,25 @@ namespace ToolkitPawnQueue.Commands
 
             if (sharp > 0)
             {
-                payload += "🗡️ " + sharp;
+                payload += "🗡️ " + sharp.ToStringPercent();
             }
 
             if (blunt > 0)
             {
-                payload += "🧱 " + blunt;
+                payload += "🧱 " + blunt.ToStringPercent();
             }
 
             if (heat > 0)
             {
-                payload += "🔥 " + heat;
-            }
-
-            if (payload.Length > 0)
-            {
-                payload += " | ";
+                payload += "🔥 " + heat.ToStringPercent();
             }
 
             var e = _target.equipment;
 
             if (e?.AllEquipmentListForReading?.Count > 0)
             {
+                payload += "|";
+                
                 var equipment = e.AllEquipmentListForReading;
                 payload += string.Join(", ", equipment.Select(item => item.LabelCap).ToArray());
             }

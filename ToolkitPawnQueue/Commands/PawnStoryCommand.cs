@@ -43,8 +43,8 @@ namespace ToolkitPawnQueue.Commands
                 return;
             }
 
-            var response = $"@{chatCommand.ChatMessage.Username} → ";
-            response += string.Join(", ", _target.story.AllBackstories.Select(s => s.title).ToArray());
+            var response = $"@{chatCommand.ChatMessage.Username} → Backstory: ";
+            response += string.Join(", ", _target.story.AllBackstories.Select(s => s.title).ToArray()).CapitalizeFirst();
             response += " | ";
 
             switch (_target.gender)

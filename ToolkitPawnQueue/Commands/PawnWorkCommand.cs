@@ -43,7 +43,7 @@ namespace ToolkitPawnQueue.Commands
 
             if (!_target.workSettings?.EverWork ?? true)
             {
-                TwitchWrapper.SendChatMessage(response + "Your pawn is incapable of work.");
+                TwitchWrapper.SendChatMessage($"{response}Your pawn is incapable of work.");
                 return;
             }
 
@@ -52,9 +52,9 @@ namespace ToolkitPawnQueue.Commands
                 .ThenBy(p => p.naturalPriority)
                 .Reverse()
                 .Where(p => _target.workSettings.GetPriority(p) > 0)
-                .Select(p => p.ToString());
+                .Select(p => $"{p}: {_target.workSettings.GetPriority(p).ToString()}");
 
-            response += $"{_target.Name.ToStringShort.CapitalizeFirst()}'s work priorities ";
+            response += "Your work priorities are: ";
             response += string.Join(", ", priorities.ToArray());
 
             TwitchWrapper.SendChatMessage(response);
