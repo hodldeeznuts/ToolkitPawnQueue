@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+using TwitchLib.Client.Interfaces;
 using Verse;
 
 namespace ToolkitPawnQueue.Commands
@@ -9,12 +9,12 @@ namespace ToolkitPawnQueue.Commands
     public class PawnNeedsCommand : CommandMethod
     {
         private Pawn _target;
-        
+
         public PawnNeedsCommand(ToolkitChatCommand command) : base(command)
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -32,16 +32,15 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             if (_target == null)
             {
                 return;
             }
 
-            var response = $"@{chatCommand.ChatMessage.Username} → ";
-            response += $"Your needs are: ";
-            
+            var response = $"@{chatCommand.ChatMessage.Username} → Your needs are: ";
+
             var container = new StringBuilder();
             var needs = _target.needs.AllNeeds;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using RimWorld;
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+using TwitchLib.Client.Interfaces;
 using Verse;
 
 namespace ToolkitPawnQueue.Commands
@@ -16,7 +16,7 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -34,7 +34,7 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             if (_target == null)
             {
@@ -42,10 +42,10 @@ namespace ToolkitPawnQueue.Commands
             }
 
             var response = $"@{chatCommand.ChatMessage.Username} → ";
+            var query = chatCommand.Message.Split(' ').Skip(1).FirstOrDefault();
 
-            if (chatCommand.ArgumentsAsList.Any())
+            if (!query.NullOrEmpty())
             {
-                var query = chatCommand.ArgumentsAsList.FirstOrDefault();
                 var result =
                     DefDatabase<PawnCapacityDef>.AllDefsListForReading.FirstOrDefault(
                         d => d.defName.EqualsIgnoreCase(query)
@@ -63,6 +63,65 @@ namespace ToolkitPawnQueue.Commands
             TwitchWrapper.SendChatMessage(response);
         }
 
+        private static string GetCapacityReport(Pawn subject, PawnCapacityDef capacity)
+        {
+            var payload = $"{capacity.GetLabelFor(subject).CapitalizeFirst()}: ";
+
+            if (!PawnCapacityUtility.BodyCanEverDoCapacity(subject.RaceProps.body, capacity))
+            {
+                payload += $"{Find.ActiveLanguageWorker.Pluralize(subject.kindDef.race.defName)} ";
+                payload += $" are incapable of {capacity.GetLabelFor(subject)}";
+
+                return payload;
+            }
+
+            var impactors = new List<PawnCapacityUtility.CapacityImpactor>();
+            payload += PawnCapacityUtility.CalculateCapacityLevel(subject.health.hediffSet, capacity, impactors)
+                .ToStringPercent();
+            payload += " | ";
+
+            if (!impactors.Any())
+            {
+                return $"{payload}No health conditions";
+            }
+
+            var segments = new List<string>();
+
+            foreach (var i in impactors)
+            {
+                if (i is PawnCapacityUtility.CapacityImpactorHediff)
+                {
+                    segments.Add(i.Readable(subject));
+                }
+            }
+
+            foreach (var i in impactors)
+            {
+                if (i is PawnCapacityUtility.CapacityImpactorBodyPartHealth)
+                {
+                    segments.Add(i.Readable(subject));
+                }
+            }
+
+            foreach (var i in impactors)
+            {
+                if (i is PawnCapacityUtility.CapacityImpactorCapacity)
+                {
+                    segments.Add(i.Readable(subject));
+                }
+            }
+
+            foreach (var i in impactors)
+            {
+                if (i is PawnCapacityUtility.CapacityImpactorPain)
+                {
+                    segments.Add(i.Readable(subject));
+                }
+            }
+
+            return $"{payload} | {string.Join(", ", segments.ToArray())}";
+        }
+
         private static string GetHealthReport(Pawn subject)
         {
             var health = subject.health;
@@ -77,7 +136,7 @@ namespace ToolkitPawnQueue.Commands
                 var ticks = HealthUtility.TicksUntilDeathDueToBloodLoss(subject);
 
                 payload += " | ";
-                payload += ticks >= 60000 ? "⌛" : "⏳ " + ticks.ToStringTicksToPeriod(shortForm: true);
+                payload += ticks >= 60000 ? "⌛" : $"⏳ {ticks.ToStringTicksToPeriod(shortForm: true)}";
                 payload += " | ";
             }
 
@@ -115,7 +174,7 @@ namespace ToolkitPawnQueue.Commands
                     continue;
                 }
 
-                container += capacity.GetLabelFor(subject).CapitalizeFirst() + ": ";
+                container += $"{capacity.GetLabelFor(subject).CapitalizeFirst()}: ";
                 container += HealthCardUtility.GetEfficiencyLabel(subject, capacity).First;
                 container += ", ";
             }
@@ -123,63 +182,19 @@ namespace ToolkitPawnQueue.Commands
             return payload + container.Substring(0, container.Length - 2);
         }
 
-        private static string GetCapacityReport(Pawn subject, PawnCapacityDef capacity)
+        private static string GetHealthStateFriendly(PawnHealthState state)
         {
-            var payload = $"{capacity.GetLabelFor(subject).CapitalizeFirst()}: ";
-
-            if (!PawnCapacityUtility.BodyCanEverDoCapacity(subject.RaceProps.body, capacity))
+            switch (state)
             {
-                payload += Find.ActiveLanguageWorker.Pluralize(subject.kindDef.race.defName) + " ";
-                payload += " are incapable of " + capacity.GetLabelFor(subject);
+                case PawnHealthState.Down:
+                    return "💫";
 
-                return payload;
+                case PawnHealthState.Dead:
+                    return "👻";
+
+                default:
+                    return string.Empty;
             }
-
-            var impactors = new List<PawnCapacityUtility.CapacityImpactor>();
-            payload += PawnCapacityUtility.CalculateCapacityLevel(subject.health.hediffSet, capacity, impactors)
-                .ToStringPercent();
-            payload += " | ";
-
-            if (!impactors.Any())
-            {
-                return payload + "No health conditions";
-            }
-
-            var segments = new List<string>();
-
-            foreach (var i in impactors)
-            {
-                if (i is PawnCapacityUtility.CapacityImpactorHediff)
-                {
-                    segments.Add(i.Readable(subject));
-                }
-            }
-
-            foreach (var i in impactors)
-            {
-                if (i is PawnCapacityUtility.CapacityImpactorBodyPartHealth)
-                {
-                    segments.Add(i.Readable(subject));
-                }
-            }
-
-            foreach (var i in impactors)
-            {
-                if (i is PawnCapacityUtility.CapacityImpactorCapacity)
-                {
-                    segments.Add(i.Readable(subject));
-                }
-            }
-
-            foreach (var i in impactors)
-            {
-                if (i is PawnCapacityUtility.CapacityImpactorPain)
-                {
-                    segments.Add(i.Readable(subject));
-                }
-            }
-
-            return payload + " | " + string.Join(", ", segments.ToArray());
         }
 
         private static string GetMoodFriendly(Pawn subject)
@@ -213,19 +228,6 @@ namespace ToolkitPawnQueue.Commands
             }
 
             return moodLevel < 0.899999976158142 ? "🙂" : "😊";
-        }
-
-        private static string GetHealthStateFriendly(PawnHealthState state)
-        {
-            switch (state)
-            {
-                case PawnHealthState.Down:
-                    return "💫";
-                case PawnHealthState.Dead:
-                    return "👻";
-                default:
-                    return string.Empty;
-            }
         }
     }
 }

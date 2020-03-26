@@ -1,7 +1,7 @@
 ﻿using RimWorld;
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+using TwitchLib.Client.Interfaces;
 using Verse;
 
 namespace ToolkitPawnQueue.Commands
@@ -14,7 +14,7 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -32,22 +32,21 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             if (_target == null)
             {
                 return;
             }
 
-            var response = $"@{chatCommand.ChatMessage.Username} → ";
-            response += $"Your skill levels are: ";
+            var response = $"@{chatCommand.ChatMessage.Username} → Your skill levels are: ";
 
             var skills = _target.skills.skills;
 
             for (var i = 0; i < skills.Count; i++)
             {
                 var skill = skills[i];
-                response += $"{skill.def.LabelCap}: ";
+                response += $"{skill.def.LabelCap.RawText}: ";
                 response += skill.TotallyDisabled ? "-" : skill.levelInt.ToString();
 
                 switch (skill.passion)
@@ -55,6 +54,7 @@ namespace ToolkitPawnQueue.Commands
                     case Passion.Major:
                         response += "🔥🔥";
                         break;
+
                     case Passion.Minor:
                         response += "🔥";
                         break;

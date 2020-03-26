@@ -3,7 +3,7 @@ using System.Linq;
 using RimWorld;
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+using TwitchLib.Client.Interfaces;
 using Verse;
 
 namespace ToolkitPawnQueue.Commands
@@ -16,7 +16,7 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -34,7 +34,7 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             if (_target == null)
             {
@@ -55,7 +55,7 @@ namespace ToolkitPawnQueue.Commands
             var tMax = _target.GetStatValue(StatDefOf.ComfyTemperatureMax).ToStringTemperature();
 
             response += $"🌡️{tMin}~{tMax}";
-            
+
             foreach (var group in grouped)
             {
                 var part = group.Key?.LabelCap ?? "WholeBody".Translate();
@@ -107,7 +107,7 @@ namespace ToolkitPawnQueue.Commands
                 yield return part;
             }
 
-            var e = pawn.health.hediffSet.hediffs.Where(d => !(d is Hediff_MissingPart) && d.Visible);
+            var e = pawn.health.hediffSet.hediffs.Where(d => !(d is Hediff_MissingPart) && d.Visible).ToList();
 
             foreach (var item in e)
             {

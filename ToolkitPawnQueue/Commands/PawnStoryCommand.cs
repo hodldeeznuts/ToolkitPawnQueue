@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+
+using TwitchLib.Client.Interfaces;
+
 using Verse;
 
 namespace ToolkitPawnQueue.Commands
@@ -18,16 +19,16 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
-            if (!base.CanExecute(chatCommand))
+            if(!base.CanExecute(chatCommand))
             {
                 return false;
             }
 
             var component = Current.Game.GetComponent<GameComponentPawnTracking>();
 
-            if (component?.TryGetPawnAssignedToUser(chatCommand.ChatMessage.Username, out _target) == true)
+            if(component?.TryGetPawnAssignedToUser(chatCommand.ChatMessage.Username, out _target) == true)
             {
                 return true;
             }
@@ -36,9 +37,9 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
-            if (_target == null)
+            if(_target == null)
             {
                 return;
             }
@@ -47,14 +48,16 @@ namespace ToolkitPawnQueue.Commands
             response += string.Join(", ", _target.story.AllBackstories.Select(s => s.title).ToArray()).CapitalizeFirst();
             response += " | ";
 
-            switch (_target.gender)
+            switch(_target.gender)
             {
                 case Gender.Female:
                     response += "♀";
                     break;
+
                 case Gender.Male:
                     response += "♂";
                     break;
+
                 case Gender.None:
                     response += "⚪";
                     break;
@@ -63,7 +66,7 @@ namespace ToolkitPawnQueue.Commands
             var workContainer = new StringBuilder();
             var workTags = _target.story.DisabledWorkTagsBackstoryAndTraits;
 
-            if (workTags == WorkTags.None)
+            if(workTags == WorkTags.None)
             {
                 workContainer.Append("(" + "NoneLower".Translate() + " ), ");
             }
@@ -72,7 +75,7 @@ namespace ToolkitPawnQueue.Commands
                 var tags = GetWorkTags(workTags);
                 var start = true;
 
-                foreach (var tag in tags)
+                foreach(var tag in tags)
                 {
                     workContainer.Append(start ? tag.LabelTranslated().CapitalizeFirst() : tag.LabelTranslated());
                     workContainer.Append(", ");
@@ -83,7 +86,7 @@ namespace ToolkitPawnQueue.Commands
             var result = workContainer.ToString();
             result = result.Substring(0, result.Length - 2);
 
-            response += " | Incapable of: " + result;
+            response += $" | Incapable of: {result}";
             response += " | Traits: ";
             response += string.Join(", ", _target.story.traits.allTraits.Select(t => t.LabelCap));
 

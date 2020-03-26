@@ -2,7 +2,7 @@
 using RimWorld;
 using ToolkitCore;
 using ToolkitCore.Models;
-using TwitchLib.Client.Models;
+using TwitchLib.Client.Interfaces;
 using UnityEngine;
 using Verse;
 
@@ -16,7 +16,7 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -34,7 +34,7 @@ namespace ToolkitPawnQueue.Commands
             return false;
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             if (_target == null)
             {
@@ -48,17 +48,17 @@ namespace ToolkitPawnQueue.Commands
 
             if (sharp > 0)
             {
-                payload += "🗡️ " + sharp.ToStringPercent();
+                payload += $"🗡️ {sharp.ToStringPercent()}";
             }
 
             if (blunt > 0)
             {
-                payload += "🧱 " + blunt.ToStringPercent();
+                payload += $"🧱 {blunt.ToStringPercent()}";
             }
 
             if (heat > 0)
             {
-                payload += "🔥 " + heat.ToStringPercent();
+                payload += $"🔥 {heat.ToStringPercent()}";
             }
 
             var e = _target.equipment;
@@ -66,7 +66,7 @@ namespace ToolkitPawnQueue.Commands
             if (e?.AllEquipmentListForReading?.Count > 0)
             {
                 payload += "|";
-                
+
                 var equipment = e.AllEquipmentListForReading;
                 payload += string.Join(", ", equipment.Select(item => item.LabelCap).ToArray());
             }

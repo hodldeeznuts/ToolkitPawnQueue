@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -33,10 +33,19 @@
   <ItemGroup>
     <Compile Include="GameComponentPawnTracking.cs" />
     <Compile Include="PawnAssignmentWindow.cs" />
+    <Compile Include="PawnCommands.cs" />
     <Compile Include="PawnQueue.cs" />
     <Compile Include="PawnQueueSettings.cs" />
     <Compile Include="PawnUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\JoinQueueCommand.cs" />
+    <Compile Include="Commands\PawnBodyCommand.cs" />
+    <Compile Include="Commands\PawnGearCommand.cs" />
+    <Compile Include="Commands\PawnHealthCommand.cs" />
+    <Compile Include="Commands\PawnNeedsCommand.cs" />
+    <Compile Include="Commands\PawnSkillsCommand.cs" />
+    <Compile Include="Commands\PawnStoryCommand.cs" />
+    <Compile Include="Commands\PawnWorkCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About\About.xml">
@@ -44,12 +53,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.1" />
+    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.3" />
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.2579" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Content Include="Defs\PawnCommands.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,7 @@
-﻿using ToolkitCore;
+﻿using System.Linq;
+using ToolkitCore;
 using ToolkitCore.Models;
+using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 using Verse;
 
@@ -11,7 +13,7 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
-        public override bool CanExecute(ChatCommand chatCommand)
+        public override bool CanExecute(ITwitchCommand chatCommand)
         {
             if (!base.CanExecute(chatCommand))
             {
@@ -23,7 +25,7 @@ namespace ToolkitPawnQueue.Commands
             return !component.UsernameInQueue(chatCommand.ChatMessage.Username);
         }
 
-        public override void Execute(ChatCommand chatCommand)
+        public override void Execute(ITwitchCommand chatCommand)
         {
             var component = Current.Game.GetComponent<GameComponentPawnTracking>();
 
