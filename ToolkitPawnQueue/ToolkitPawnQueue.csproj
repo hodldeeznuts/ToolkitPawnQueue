@@ -33,19 +33,18 @@
   <ItemGroup>
     <Compile Include="GameComponentPawnTracking.cs" />
     <Compile Include="PawnAssignmentWindow.cs" />
-    <Compile Include="PawnCommands.cs" />
     <Compile Include="PawnQueue.cs" />
     <Compile Include="PawnQueueSettings.cs" />
     <Compile Include="PawnUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\JoinQueueCommand.cs" />
-    <Compile Include="Commands\PawnBodyCommand.cs" />
-    <Compile Include="Commands\PawnGearCommand.cs" />
-    <Compile Include="Commands\PawnHealthCommand.cs" />
-    <Compile Include="Commands\PawnNeedsCommand.cs" />
-    <Compile Include="Commands\PawnSkillsCommand.cs" />
-    <Compile Include="Commands\PawnStoryCommand.cs" />
-    <Compile Include="Commands\PawnWorkCommand.cs" />
+    <Compile Include="CommandMethods\JoinQueueCommand.cs" />
+    <Compile Include="CommandMethods\PawnBodyCommand.cs" />
+    <Compile Include="CommandMethods\PawnGearCommand.cs" />
+    <Compile Include="CommandMethods\PawnHealthCommand.cs" />
+    <Compile Include="CommandMethods\PawnNeedsCommand.cs" />
+    <Compile Include="CommandMethods\PawnSkillsCommand.cs" />
+    <Compile Include="CommandMethods\PawnStoryCommand.cs" />
+    <Compile Include="CommandMethods\PawnWorkCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About\About.xml">

@@ -5,7 +5,7 @@
         <defName>JoinQueue</defName>
         <commandText>joinqueue</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.JoinQueueCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.JoinQueueCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -14,7 +14,7 @@
         <defName>PawnBody</defName>
         <commandText>mypawnbody</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnBodyCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnBodyCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -23,7 +23,7 @@
         <defName>PawnGear</defName>
         <commandText>mypawngear</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnGearCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnGearCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -32,7 +32,7 @@
         <defName>PawnHealth</defName>
         <commandText>mypawnhealth</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnHealthCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnHealthCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -41,7 +41,7 @@
         <defName>PawnNeeds</defName>
         <commandText>mypawnneeds</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnNeedsCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnNeedsCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -50,7 +50,7 @@
         <defName>PawnSkills</defName>
         <commandText>mypawnskills</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnSkillsCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnSkillsCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -59,7 +59,7 @@
         <defName>PawnStory</defName>
         <commandText>mypawnstory</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnStoryCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnStoryCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
@@ -68,7 +68,7 @@
         <defName>PawnWork</defName>
         <commandText>mypawnwork</commandText>
         <enabled>true</enabled>
-        <commandClass>ToolkitPawnQueue.Commands.PawnWorkCommand</commandClass>
+        <commandClass>ToolkitPawnQueue.CommandMethods.PawnWorkCommand</commandClass>
         <requiresMod>false</requiresMod>
         <requiresBroadcaster>false</requiresBroadcaster>
     </ToolkitCore.Models.ToolkitChatCommand>
