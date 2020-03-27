@@ -5,7 +5,7 @@ using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 using Verse;
 
-namespace ToolkitPawnQueue.Commands
+namespace ToolkitPawnQueue.CommandMethods
 {
     public class JoinQueueCommand : CommandMethod
     {

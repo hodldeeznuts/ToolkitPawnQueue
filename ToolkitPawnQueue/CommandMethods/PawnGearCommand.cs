@@ -6,7 +6,7 @@ using TwitchLib.Client.Interfaces;
 using UnityEngine;
 using Verse;
 
-namespace ToolkitPawnQueue.Commands
+namespace ToolkitPawnQueue.CommandMethods
 {
     public class PawnGearCommand : CommandMethod
     {

@@ -61,6 +61,8 @@ namespace ToolkitPawnQueue
                 Find.WindowStack.Add(window);
             }
 
+            ls.CheckboxLabeled("Allow viewers to join queue:", ref joinableQueue);
+
             ls.End();
         }
 

@@ -23,9 +23,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\RimWorld\Mods\ToolkitPawnQueue\</OutputPath>
+    <OutputPath>C:\Program Files %28x86%29\Steam\steamapps\common\RimWorld\Mods\ToolkitPawnQueue\Assemblies</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,19 +47,24 @@
     <Compile Include="CommandMethods\PawnWorkCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About\About.xml">
+    <!-- Using ContentWithTargetPath+TargetPath rather than Content+Link because the latter apparently must have the Link path be within OutputDir -->
+    <ContentWithTargetPath Include="About\About.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+      <TargetPath>..\About\About.xml</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Defs\Commands\PawnCommands.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>..\Defs\Commands\PawnCommands.xml</TargetPath>
+    </ContentWithTargetPath>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.3" />
+    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.3" ExcludeAssets="runtime" />
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.2579" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Defs\PawnCommands.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

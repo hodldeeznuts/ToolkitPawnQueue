@@ -9,7 +9,7 @@ using TwitchLib.Client.Interfaces;
 
 using Verse;
 
-namespace ToolkitPawnQueue.Commands
+namespace ToolkitPawnQueue.CommandMethods
 {
     public class PawnStoryCommand : CommandMethod
     {
