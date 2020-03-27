@@ -58,7 +58,7 @@
     </ContentWithTargetPath>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.3" ExcludeAssets="runtime" />
+    <PackageReference Include="HodlHodl.Rimworld.Toolkit.Core" Version="1.0.4" ExcludeAssets="runtime" />
     <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.2579" />
   </ItemGroup>
   <ItemGroup>
