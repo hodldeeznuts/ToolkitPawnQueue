@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolkitCore.Controllers;
 using Verse;
 
 namespace ToolkitPawnQueue
@@ -110,7 +111,14 @@ namespace ToolkitPawnQueue
         {
             pawnsTracked.Remove(username);
 
-            TryAddUsernameToQueue(username);
+            ViewerController.GetViewer(username, out bool viewerExists, true);
+
+            // if viewer previously existed, add them back to queue
+
+            if (viewerExists)
+            {
+                TryAddUsernameToQueue(username);
+            } 
         }
 
         #endregion
