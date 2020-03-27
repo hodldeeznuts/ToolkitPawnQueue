@@ -65,12 +65,21 @@ namespace ToolkitPawnQueue
 
             // Bottom Section
 
-            Rect pawnInformation = new Rect(0f, 140f, inRect.width, 32f);
+            Rect pawnInformation = new Rect(0f, 140f, 240f, 24f);
 
             if (assignedUsername != null)
             {
                 // Viewer Assigned
                 Widgets.Label(pawnInformation, $"<color=green>Assigned User</color>: {assignedUsername}");
+
+                PawnUtilities.NewLine(pawnInformation, out Rect unassignButton);
+                unassignButton.width = 140f;
+
+                if (Widgets.ButtonText(unassignButton, "Unassign Viewer"))
+                {
+                    component.UnassignUserFromPawn(assignedUsername);
+                    UpdateInfoFromPawnChange();
+                }
             }
             else
             {
@@ -79,15 +88,15 @@ namespace ToolkitPawnQueue
 
                 PawnUtilities.NewLine(pawnInformation, out Rect usernamesInfo);
 
-                Widgets.Label(usernamesInfo, $"Users in Queue: {PawnUtilities.usernamesInQueue}");
+                Widgets.Label(usernamesInfo, $"Users in Queue: {component.NumOfViewersInQueue}");
 
                 PawnUtilities.NewLine(usernamesInfo, out Rect pickUsername);
 
-                if (PawnUtilities.usernamesInQueue > 0)
+                if (component.NumOfViewersInQueue > 0)
                 {
-                    Widgets.Label(pickUsername, "Pick User: ");
+                    Widgets.Label(pickUsername, "Pick Viewer: ");
 
-                    pickUsername.x += 80f;
+                    pickUsername.x += 100f;
                     pickUsername.width = 80f;
                     Text.Anchor = TextAnchor.MiddleCenter;
 
@@ -111,16 +120,23 @@ namespace ToolkitPawnQueue
 
                 if (usernameFromQueue != null)
                 {
-                    usernameFromQueue = Widgets.TextEntryLabeled(usernameInput, "Assign to User: ", usernameFromQueue);
+                    usernameFromQueue = Widgets.TextEntryLabeled(usernameInput, "Assign to Viewer: ", usernameFromQueue);
                 }
                 else
                 {
-                    usernameFromQueue = Widgets.TextEntryLabeled(usernameInput, "Assign to User: ", "");
+                    usernameFromQueue = Widgets.TextEntryLabeled(usernameInput, "Assign to Viewer: ", "");
                 }
 
-                Text.Anchor = TextAnchor.UpperLeft;
+                PawnUtilities.NewLine(usernameInput, out Rect assignButton);
+
+                if (usernameFromQueue != null & Widgets.ButtonText(assignButton, "Confirm Assignment"))
+                {
+                    component.TryAssigningUserToPawn(usernameFromQueue, selectedPawn);
+                    UpdateInfoFromPawnChange();
+                }
             }
 
+            Text.Anchor = TextAnchor.UpperLeft;
         }
 
         void NextPawn()
@@ -153,8 +169,6 @@ namespace ToolkitPawnQueue
 
         void NextUsername()
         {
-            GameComponentPawnTracking component = Current.Game.GetComponent<GameComponentPawnTracking>();
-
             if (usernameFromQueue == null)
             {
                 usernameFromQueue = component.viewersInQueue[0];
@@ -175,11 +189,15 @@ namespace ToolkitPawnQueue
 
         void RandomUsername()
         {
-            Current.Game.GetComponent<GameComponentPawnTracking>().TryGetRandomViewerFromQueue(out usernameFromQueue);
+            component.TryGetRandomViewerFromQueue(out usernameFromQueue);
             usernameIterator = 0;
         }
 
         string usernameFromQueue = null;
+
+        // PawnTracking
+
+        GameComponentPawnTracking component = Current.Game.GetComponent<GameComponentPawnTracking>();
 
         // Selected Pawn
 
@@ -195,7 +213,7 @@ namespace ToolkitPawnQueue
         {
             selectedPawn = PawnUtilities.currentListOfPawns[iterator];
 
-            PawnUtilities.TryFindUserAssigned(selectedPawn, out assignedUsername);
+            component.TryGetUserAssignedToPawn(selectedPawn, out assignedUsername);
 
             usernameFromQueue = null;
         }

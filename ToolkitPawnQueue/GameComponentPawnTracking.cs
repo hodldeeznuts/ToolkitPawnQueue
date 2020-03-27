@@ -27,7 +27,7 @@ namespace ToolkitPawnQueue
             }
         }
 
-        public int ViewersInQueue => viewersInQueue.Count();
+        public int NumOfViewersInQueue => viewersInQueue.Count();
 
         #region PawnAssignment
 
@@ -85,14 +85,31 @@ namespace ToolkitPawnQueue
 
         public bool TryGetRandomViewerFromQueue(out string username)
         {
-            if (ViewersInQueue > 0)
+            if (NumOfViewersInQueue > 0)
             {
-                username = viewersInQueue[new Random().Next(ViewersInQueue - 1)];
+                username = viewersInQueue[new Random().Next(NumOfViewersInQueue - 1)];
                 return true;
             }
 
             username = null;
             return false;
+        }
+
+        public bool TryAssigningUserToPawn(string username, Pawn pawnToAssign)
+        {
+            if (TryGetPawnAssignedToUser(username, out Pawn pawnAssigned)) return false;
+
+            pawnsTracked.Add(username, pawnToAssign);
+
+            if (viewersInQueue.Contains(username)) viewersInQueue.Remove(username);
+
+            return true;
+        }
+
+        public void UnassignUserFromPawn(string username)
+        {
+            pawnsTracked.Remove(username);
+            viewersInQueue.Add(username);
         }
 
         #endregion
