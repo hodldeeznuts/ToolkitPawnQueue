@@ -97,7 +97,7 @@ namespace ToolkitPawnQueue
 
         public bool TryAssigningUserToPawn(string username, Pawn pawnToAssign)
         {
-            if (TryGetPawnAssignedToUser(username, out Pawn pawnAssigned)) return false;
+            if (username == "" || TryGetPawnAssignedToUser(username, out Pawn pawnAssigned)) return false;
 
             pawnsTracked.Add(username, pawnToAssign);
 
@@ -109,7 +109,8 @@ namespace ToolkitPawnQueue
         public void UnassignUserFromPawn(string username)
         {
             pawnsTracked.Remove(username);
-            viewersInQueue.Add(username);
+
+            TryAddUsernameToQueue(username);
         }
 
         #endregion
