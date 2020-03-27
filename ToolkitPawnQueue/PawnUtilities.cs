@@ -15,7 +15,7 @@ namespace ToolkitPawnQueue
 
         public static void NewLine(Rect rect, out Rect newRect)
         {
-            newRect = new Rect(rect.x, rect.y + rect.height + 2f, rect.width, rect.height);
+            newRect = new Rect(rect.x, rect.y + rect.height + 8f, rect.width, rect.height);
         }
 
         public static bool TryFindUserAssigned(Pawn pawn, out string username)
@@ -30,10 +30,6 @@ namespace ToolkitPawnQueue
             username = null;
             return false;
         }
-
-        // Selected User
-
-        public static int usernamesInQueue => Current.Game.GetComponent<GameComponentPawnTracking>().viewersInQueue.Count;
 
         // GUI
 
