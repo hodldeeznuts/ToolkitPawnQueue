@@ -13,6 +13,13 @@ namespace ToolkitPawnQueue.Commands
         {
         }
 
+        public override bool CanExecute(ITwitchCommand twitchCommand)
+        {
+            if (!base.CanExecute(twitchCommand) || !PawnQueueSettings.joinableQueue) return false;
+
+            return true;
+        }
+
         public override void Execute(ITwitchCommand twitchCommand)
         {
             GameComponentPawnTracking component = Current.Game.GetComponent<GameComponentPawnTracking>();
