@@ -18,6 +18,9 @@
     <li>hodlhodl.toolkitcore</li>
   </loadAfter>
   <incompatibleWith>
+    <li>hodlhodl.twitchtoolkit</li>
     <li>hodl.twitchtoolkit</li>
+    <li>hodlhodl.toolkitdev</li>
+    <li>hodl.toolkitdev</li>
   </incompatibleWith>
 </ModMetaData>

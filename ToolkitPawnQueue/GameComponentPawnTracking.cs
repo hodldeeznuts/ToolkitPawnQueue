@@ -111,11 +111,9 @@ namespace ToolkitPawnQueue
         {
             pawnsTracked.Remove(username);
 
-            ViewerController.GetViewer(username, out bool viewerExists, true);
-
             // if viewer previously existed, add them back to queue
 
-            if (viewerExists)
+            if (ViewerController.ViewerExists(username))
             {
                 TryAddUsernameToQueue(username);
             } 
