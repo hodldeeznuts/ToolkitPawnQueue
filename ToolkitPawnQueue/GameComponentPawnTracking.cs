@@ -103,7 +103,7 @@ namespace ToolkitPawnQueue
             if (PawnQueueSettings.renameAssignedPawns)
             {
                 NameTriple oldName = pawnToAssign.Name as NameTriple;
-                NameTriple newName = new NameTriple(oldName.First, username, oldName.Last);
+                pawnToAssign.Name = new NameTriple(oldName.First, username, oldName.Last);
             }
 
             pawnsTracked.Add(username, pawnToAssign);
