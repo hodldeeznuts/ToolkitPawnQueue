@@ -100,6 +100,12 @@ namespace ToolkitPawnQueue
         {
             if (username == "" || TryGetPawnAssignedToUser(username, out Pawn pawnAssigned)) return false;
 
+            if (PawnQueueSettings.renameAssignedPawns)
+            {
+                NameTriple oldName = pawnToAssign.Name as NameTriple;
+                Name newName = new NameTriple()
+            }
+
             pawnsTracked.Add(username, pawnToAssign);
 
             if (viewersInQueue.Contains(username)) viewersInQueue.Remove(username);

@@ -9,6 +9,15 @@ namespace ToolkitPawnQueue
         // Features
         public static bool joinableQueue;
 
+        public static bool renameAssignedPawns;
+
+        // Commands
+        public static bool pawnSkillsCommand;
+
+        public static bool pawnStoryCommand;
+
+        public static bool pawnWorkCommand;
+
         public static bool pawnBodyCommand;
 
         public static bool pawnGearCommand;
@@ -16,12 +25,6 @@ namespace ToolkitPawnQueue
         public static bool pawnHealthCommand;
 
         public static bool pawnNeedsCommand;
-
-        // Commands
-        public static bool pawnSkillsCommand;
-
-        public static bool pawnStoryCommand;
-        public static bool pawnWorkCommand;
 
         public void DoWindowContents(Rect rect)
         {
@@ -32,6 +35,10 @@ namespace ToolkitPawnQueue
             ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of available usernames.");
 
             ls.CheckboxLabeled("Joinable Name Queue - !joinqueue", ref joinableQueue, "Let viewers join a name queue");
+
+            ls.GapLine();
+
+            ls.CheckboxLabeled("Rename Pawns on Assignment", ref renameAssignedPawns, "Rename pawns that are assigned to have the viewers name");
 
             ls.GapLine();
 
@@ -68,6 +75,8 @@ namespace ToolkitPawnQueue
         public override void ExposeData()
         {
             Scribe_Values.Look(ref joinableQueue, "joinableQueue", true);
+            Scribe_Values.Look(ref renameAssignedPawns, "renameAssignedPawns", true);
+
             Scribe_Values.Look(ref pawnSkillsCommand, "pawnSkillsCommand", true);
             Scribe_Values.Look(ref pawnStoryCommand, "pawnStoryCommand", true);
             Scribe_Values.Look(ref pawnBodyCommand, "pawnBodyCommand", true);

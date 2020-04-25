@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToolkitCore.Controllers;
 using UnityEngine;
 using Verse;
 
@@ -131,7 +132,20 @@ namespace ToolkitPawnQueue
 
                 if (usernameFromQueue != null & Widgets.ButtonText(assignButton, "Confirm Assignment"))
                 {
-                    component.TryAssigningUserToPawn(usernameFromQueue, selectedPawn);
+                    bool viewerDataExists = ViewerController.ViewerExists(usernameFromQueue);
+
+                    string pawnName = usernameFromQueue;
+
+                    if (viewerDataExists)
+                    {
+                        string displayName = ViewerController.GetViewer(usernameFromQueue).DisplayName;
+                        if (displayName != null && displayName != string.Empty)
+                        {
+                            pawnName = displayName;
+                        }
+                    }
+
+                    component.TryAssigningUserToPawn(pawnName, selectedPawn);
                     UpdateInfoFromPawnChange();
                 }
             }
