@@ -16,7 +16,7 @@ namespace ToolkitPawnQueue.CommandMethods
 
         public override bool CanExecute(ITwitchCommand chatCommand)
         {
-            if (!base.CanExecute(chatCommand))
+            if (!base.CanExecute(chatCommand) || !PawnQueueSettings.pawnSkillsCommand)
             {
                 return false;
             }
