@@ -38,7 +38,7 @@ namespace ToolkitPawnQueue
 
             ls.GapLine();
 
-            if (ls.ButtonTextLabeled("Open/Manage name Queue", "Pawn Queue"))
+            if (ls.ButtonTextLabeled("Open/Manage Pawn Queue", "Pawn Queue"))
             {
                 PawnAssignmentWindow window = new PawnAssignmentWindow();
                 Find.WindowStack.TryRemove(typeof(PawnAssignmentWindow));
