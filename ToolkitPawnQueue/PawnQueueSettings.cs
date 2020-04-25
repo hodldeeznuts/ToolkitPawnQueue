@@ -32,9 +32,18 @@ namespace ToolkitPawnQueue
 
             ls.Begin(rect);
 
-            ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of available usernames.");
+            ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of usernames in the pawn queue");
 
-            ls.CheckboxLabeled("Joinable Name Queue - !joinqueue", ref joinableQueue, "Let viewers join a name queue");
+            ls.CheckboxLabeled("Joinable Pawn Queue - !joinqueue", ref joinableQueue, "Let viewers join a pawn queue");
+
+            ls.GapLine();
+
+            if (ls.ButtonTextLabeled("Open/Manage name Queue", "Pawn Queue"))
+            {
+                PawnAssignmentWindow window = new PawnAssignmentWindow();
+                Find.WindowStack.TryRemove(typeof(PawnAssignmentWindow));
+                Find.WindowStack.Add(window);
+            }
 
             ls.GapLine();
 
@@ -57,17 +66,6 @@ namespace ToolkitPawnQueue
             ls.CheckboxLabeled("My Pawn Work - !mypawnwork", ref pawnWorkCommand, "Let viewrs get a message containing information about their pawns work");
 
             ls.CheckboxLabeled("My Pawn Needs - !mypawnneeds", ref pawnNeedsCommand, "Let viewers get a message containing information about their pawns needs");
-
-            ls.GapLine();
-
-            if (ls.ButtonTextLabeled("Open/Manage name Queue", "Name Queue"))
-            {
-                PawnAssignmentWindow window = new PawnAssignmentWindow();
-                Find.WindowStack.TryRemove(typeof(PawnAssignmentWindow));
-                Find.WindowStack.Add(window);
-            }
-
-            ls.CheckboxLabeled("Allow viewers to join queue:", ref joinableQueue);
 
             ls.End();
         }
