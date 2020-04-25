@@ -29,7 +29,6 @@ namespace ToolkitPawnQueue
 
             ls.Begin(rect);
 
-            Removed to defs.
             ls.Label("The name queue allows viewers to use command !joinqueue to enter. In the pawn assignment window, you can assign usernames manually (without the name queue), in order, or randomly from the list of available usernames.");
 
             ls.CheckboxLabeled("Joinable Name Queue - !joinqueue", ref joinableQueue, "Let viewers join a name queue");
